@@ -1,0 +1,343 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Color+Emoji&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Color+Emoji&display=swap");
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    font-family: "Inter", sans-serif;
+}
+
+body.light {
+    --background: #bfbfbf;
+    --app-header: #fff;
+    --color: #e5e5e5;
+    --list-color: #8d8d8d;
+    --footer-text: rgb(39, 42, 42);
+    --list-text: rgb(39, 42, 42);
+
+
+}
+
+body {
+    background-color: var(--background);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: 0.3s;
+    --background: rgb(104, 108, 108);
+    --app-header: rgb(39, 42, 42);
+    --color: white;
+    --list-color: rgb(68, 73, 73);
+    --footer-text: white;
+    --list-text: white;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+input:focus {
+    outline: none;
+}
+
+
+.todo-app__header-text {
+    color: var(--footer-text);
+    font-weight: 600;
+    font-size: 14px;
+
+}
+
+.todo-app__header {
+    width: 100%;
+    height: 45px;
+    background-color: var(--app-header);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-app {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    gap: 10px;
+    padding: 30px;
+    overflow: auto;
+}
+
+.todo-list {
+    width: 300px;
+    background-color: var(--app-header);
+    border-radius: 10px;
+    transform: translate(0, 0);
+    transition: all 0.1s;
+    color: var(--color);
+    padding: 25px 15px;
+    height: fit-content;
+    flex-shrink: 0;
+
+    .todo-list__delete-item-btn {
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    &:hover {
+        .todo-list__delete-item-btn {
+            opacity: 1;
+        }
+
+        cursor: grab;
+    }
+
+    * {
+        cursor: auto;
+    }
+}
+
+.todo-list__delete-item-btn img {
+    pointer-events: none;
+}
+
+.todo-list button {
+    background: var(--color);
+    border: 1px solid var(--color);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 2px;
+    width: 26px;
+    height: 26px;
+}
+
+.todo-list__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo-list__title-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--footer-text);
+}
+
+.todo-list__list {
+    margin-top: 20px;
+}
+
+.todo-item__list-item {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    transition: all 0.3s;
+    border-radius: 5px;
+    color: var(--color);
+    background: var(--app-header);
+
+    .list-item__actions {
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    &:hover {
+        .list-item__actions {
+            opacity: 1;
+        }
+
+        box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.5);
+        cursor: move;
+    }
+}
+
+.todo-item__list-item button {
+    width: 24px;
+    height: 24px;
+}
+
+.todo-item__list-item-text {
+    font-size: 16px;
+    font-weight: 400;
+    max-width: 60%;
+    color: var(--list-text);
+
+    &.completed {
+        text-decoration: line-through;
+    }
+}
+
+.todo-list__add-item {
+    position: relative;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--background);
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.todo-list__add-item-icon {
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+
+}
+
+.todo-list__add-item-btn-text {
+    pointer-events: none;
+    color: var(--footer-text);
+
+}
+
+.add-todo-list {
+    position: relative;
+    display: flex;
+    width: 300px;
+    height: fit-content;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--app-header);
+    border-radius: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.add-todo-list__btn-text {
+    pointer-events: none;
+    color: var(--footer-text);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.add-todo-list__icon {
+    pointer-events: none;
+    width: 24px;
+    height: 24px;
+
+}
+
+.add-todo-list__window,
+.todo-list__add-item-window {
+    display: flex;
+    position: absolute;
+    width: 0;
+    top: 120%;
+    left: 0;
+    opacity: 0;
+
+    transition: all 0.3s;
+
+    &.active {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+.add-todo-list__input,
+.todo-list__add-item-input {
+    width: 100%;
+    padding: 7px 14px;
+    border-radius: 5px 0 0 5px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.add-todo-list__btn,
+.todo-list__add-item-btn {
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 34px !important;
+    width: 34px !important;
+    padding: 3px;
+    border: none;
+    border-left: 1px solid black !important;
+    border-radius: 0 5px 5px 0 !important;
+    background: var(--color);
+
+    img {
+        pointer-events: none;
+    }
+}
+
+.list-item__action {
+    * {
+        cursor: pointer;
+    }
+}
+
+.todo-app__footer {
+    width: 100%;
+    height: 45px;
+    background-color: var(--app-header);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-app__footer-text {
+    color: var(--footer-text);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.heart {
+    font-family: "Noto Color Emoji", sans-serif;
+}
+
+.ghost {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: translate 0.1s;
+}
+
+.active {
+    opacity: 0.5;
+}
+
+#todo-theme-btn {
+    position: absolute;
+    left: 20px;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 3px;
+    transition: 0.3s;
+    border: #8d8d8d;
+}
+
+
+#todo-theme-btn:hover {
+    background: transparent;
+
+
+}
+
+#todo-theme-btn img {
+    width: 20px;
+}
+
+.add-todo-list__icon-black {
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+
+}
